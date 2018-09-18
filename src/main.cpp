@@ -1,3 +1,7 @@
+// CS 116A HW 1 Pt 2 : Interactive Mesh Viewer
+// Andrew Yuan 
+// Sherwyn Sen
+
 #include "ofMain.h"
 #include "ofApp.h"
 

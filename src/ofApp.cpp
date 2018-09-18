@@ -6,11 +6,12 @@ void ofApp::setup(){
 
 	ofSetVerticalSync(true);
 
-	fileName = "rhino.obj";
+	fileName = "dancershoe.obj";
 	// load the wavefront object model
-	model.loadModel(fileName , 30);
+	model.loadModel(fileName, 20);
 
-	model.setRotation(2, 90, 1, 1, 0);
+	// set the rotation around z axis and scale down size to 80%
+	model.setRotation(2, 180, 0, 0, 1);
 	model.setScale(0.8, 0.8, 0.8);
 	light.setPosition(0, 0, 500);
 
@@ -25,24 +26,23 @@ void ofApp::update(){
 	camera.orbitDeg(cameraOrbit, 0., camera.getDistance(), { 0., 0., 0. });
 }
 
+// documentation: https://openframeworks.cc/documentation/ofxAssimpModelLoader/ofxAssimpModelLoader/
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	// DepthTest prevents model from being see through
 	ofEnableDepthTest();
 
 	light.enable();
 
 	camera.begin();
 	ofColor(255, 255);
-	// documentation: https://openframeworks.cc/documentation/ofxAssimpModelLoader/ofxAssimpModelLoader/
-	
-	//model.setPosition(ofGetWidth() / 2, (float)ofGetHeight() * 0.75, 0);
 	model.drawFaces();
 	camera.end();
 
 	light.disable();
 	ofDisableDepthTest();
 
+	// Prints out FPS and Name of File
 	stringstream ss;
 	ss << "Frames Per Second: " << ofToString(ofGetFrameRate(), 0) << endl;
 	ss << "Name of file: " + fileName << endl;

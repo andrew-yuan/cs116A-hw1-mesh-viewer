@@ -6,16 +6,6 @@
 
 class ofApp : public ofBaseApp{
 
-/*
-private:
-	ofxAssimpModelLoader model;
-	ofLight light;
-
-	//ofxPanel gui;
-	//ofxIntSlider camDistance;
-	ofEasyCam camera;
-	float cameraOrbit;
-*/
 public:
 	void setup();
 	void update();
@@ -33,7 +23,6 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 		
-	string fileName;
 	ofxAssimpModelLoader model;
 	ofLight light;
 	ofEasyCam camera;

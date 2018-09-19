@@ -6,24 +6,14 @@ void ofApp::setup(){
 
 	ofSetVerticalSync(true);
 
-	fileName = "dancershoe.obj";
-	// load the wavefront object model
-	model.loadModel(fileName, 20);
-
-	// set the rotation around z axis and scale down size to 80%
-	model.setRotation(2, 180, 0, 0, 1);
-	model.setScale(0.8, 0.8, 0.8);
-	light.setPosition(0, 0, 500);
-
-	cameraOrbit = 0;
-	camera.setDistance(700);
-
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	cameraOrbit += ofGetLastFrameTime() * 20.; // 20 degrees per second;
-	camera.orbitDeg(cameraOrbit, 0., camera.getDistance(), { 0., 0., 0. });
+	//rotation 
+	//cameraOrbit += ofGetLastFrameTime() * 20.; // 20 degrees per second;
+	//default camera
+	//camera.orbitDeg(cameraOrbit, 0., camera.getDistance(), { 0., 0., 0. });
 }
 
 // documentation: https://openframeworks.cc/documentation/ofxAssimpModelLoader/ofxAssimpModelLoader/
@@ -35,8 +25,7 @@ void ofApp::draw(){
 	light.enable();
 
 	camera.begin();
-	ofColor(255, 255);
-	model.drawFaces();
+	model.drawWireframe();
 	camera.end();
 
 	light.disable();
@@ -45,7 +34,6 @@ void ofApp::draw(){
 	// Prints out FPS and Name of File
 	stringstream ss;
 	ss << "Frames Per Second: " << ofToString(ofGetFrameRate(), 0) << endl;
-	ss << "Name of file: " + fileName << endl;
 	ofDrawBitmapString(ss.str().c_str(), 20, 20);
 
 }
@@ -102,5 +90,5 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+	model.loadModel(dragInfo.files[0], 20);
 }

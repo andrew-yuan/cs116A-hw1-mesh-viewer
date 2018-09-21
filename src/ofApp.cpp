@@ -6,14 +6,12 @@ void ofApp::setup(){
 
 	ofSetVerticalSync(true);
 
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	//rotation 
-	//cameraOrbit += ofGetLastFrameTime() * 20.; // 20 degrees per second;
-	//default camera
-	//camera.orbitDeg(cameraOrbit, 0., camera.getDistance(), { 0., 0., 0. });
+
 }
 
 // documentation: https://openframeworks.cc/documentation/ofxAssimpModelLoader/ofxAssimpModelLoader/
@@ -22,13 +20,13 @@ void ofApp::draw(){
 	// DepthTest prevents model from being see through
 	ofEnableDepthTest();
 
-	light.enable();
+	this->light.enable();
 
-	camera.begin();
-	model.drawWireframe();
-	camera.end();
+	this->camera.begin();
+	this->drawFunction();
+	this->camera.end();
 
-	light.disable();
+	this->light.disable();
 	ofDisableDepthTest();
 
 	// Prints out FPS and Name of File
@@ -90,5 +88,6 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-	model.loadModel(dragInfo.files[0], 20);
+	this->model.loadModel(dragInfo.files[0], 20);
+    this->drawFunction = std::bind(&ofxAssimpModelLoader::drawWireframe, this->model);
 }

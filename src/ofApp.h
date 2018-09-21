@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxAssimpModelLoader.h"
@@ -22,9 +24,11 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-		
+
+private:
 	ofxAssimpModelLoader model;
 	ofLight light;
 	ofEasyCam camera;
 	float cameraOrbit;
+	std::function<void()> drawFunction;
 };

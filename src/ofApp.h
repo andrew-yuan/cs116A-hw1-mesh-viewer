@@ -31,4 +31,6 @@ private:
 	ofEasyCam camera;
 	float cameraOrbit;
 	std::function<void()> drawFunction;
+
+	void changeDrawFunction(std::function<void(ofxAssimpModelLoader)> func);
 };

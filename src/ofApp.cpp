@@ -38,7 +38,17 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch (key) {
+        case 'w':
+            this->changeDrawFunction(&ofxAssimpModelLoader::drawWireframe);
+            break;
+        case 'f':
+            this->changeDrawFunction(&ofxAssimpModelLoader::drawFaces);
+            break;
+        case 'v':
+            this->changeDrawFunction(&ofxAssimpModelLoader::drawVertices);
+            break;
+    }
 }
 
 //--------------------------------------------------------------
@@ -89,5 +99,9 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 	this->model.loadModel(dragInfo.files[0], 20);
-    this->drawFunction = std::bind(&ofxAssimpModelLoader::drawWireframe, this->model);
+	this->changeDrawFunction(&ofxAssimpModelLoader::drawWireframe);
+}
+
+void ofApp::changeDrawFunction(std::function<void(ofxAssimpModelLoader)> func) {
+    this->drawFunction = std::bind(func, this->model);
 }
